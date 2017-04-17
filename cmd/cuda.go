@@ -10,6 +10,7 @@ var cudaCmd = &cobra.Command{
 	Use:   "cuda",
 	Short: "Start CUDA docker volumes",
 	Run: func(cmd *cobra.Command, args []string) {
+		println("starting to serve cuda")
 		cuda.Serve()
 	},
 }
