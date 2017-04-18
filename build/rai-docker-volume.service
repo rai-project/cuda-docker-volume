@@ -22,7 +22,7 @@ PrivateTmp=true
 #ProtectSystem=full
 StandardOutput=syslog
 
-ExecStart=/home/dakkak/.gvm/pkgsets/go1.8/global/bin/rai-docker-volume cuda --config=$CONFIG_FILE
+ExecStart=/home/dakkak/.gvm/pkgsets/go1.8/global/bin/rai-docker-volume cuda --debug --verbose --config=$CONFIG_FILE
 ExecReload=/bin/kill -USR1 $MAINPID
 
 [Install]

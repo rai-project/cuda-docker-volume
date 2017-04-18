@@ -41,3 +41,4 @@ cmd/raid/raid
 debug
 
 rai-docker-volume
+nohup*
