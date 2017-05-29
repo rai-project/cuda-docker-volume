@@ -58,5 +58,5 @@ Identify your nvidia driver version with `nvidia-smi` or through some other mean
 Try creating a volume using that diver version. For example, for driver version `361.119`:
 
     docker volume create --driver=rai-cuda rai-cuda_361.119
-
+    docker volume ls
 
