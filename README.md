@@ -18,23 +18,45 @@ Some more info on plugin activation [here](https://docs.docker.com/engine/extend
 
     go install github.com/rai-project/rai-docker-volume
 
+### Build your own
+
+Get the dependencies
+
+    glide install
+
+Build the binary
+
+    go build
+
 ## 2. Set up the rai-docker-volume systemd service
 
-Move the binary into the `/usr/local/bin` directory.
+Move the binary into the `/usr/local/bin` directory. How you do this depends on how you got the binary.
+
+Move the service and socket unit files into the appropriate places. On Ubuntu 16.04, for example:
 
     cp build/rai-docker-volume.service /lib/systemd/system/.
     cp build/rai-docker-volume.socket /lib/systemd/system/.
 
 
 # Check
+Reload the systemd daemon since you changed some files
+
+    systemctl daemon-reload
+
+Try starting the socket. It should succeed.
+
+    systemctl start rai-docker-volume.socket
+    systemctl status rai-docker-volume.socket
+
+Try startring the plugin. It should succeed.
+
+    systemctl start rai-docker-volume.service
+    systemctl status rai-docker-volume.service
+
+Identify your nvidia driver version with `nvidia-smi` or through some other means.
+
+Try creating a volume using that diver version. For example, for driver version `361.119`:
 
     docker volume create --driver=rai-cuda rai-cuda_361.119
-
-
-# For developers 
-
-Get the dependencies
-
-    glide install
 
 
