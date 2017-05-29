@@ -25,7 +25,7 @@ PrivateTmp=true
 #ProtectSystem=full
 StandardOutput=syslog
 
-ExecStart=/usr/local/bin/rai-docker-volume cuda --debug --verbose --config=$CONFIG_FILE
+ExecStart=/usr/lib/docker/rai-docker-volume cuda --debug --verbose --config=$CONFIG_FILE
 ExecReload=/bin/kill -USR1 $MAINPID
 
 [Install]

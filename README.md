@@ -30,7 +30,7 @@ Build the binary
 
 ## 2. Set up the rai-docker-volume systemd service
 
-Move the binary into the `/usr/local/bin` directory. How you do this depends on how you got the binary.
+Move the binary into the `/usr/lib/docker` directory. How you do this depends on how you got the binary.
 
 Move the service and socket unit files into the appropriate places. On Ubuntu 16.04, for example:
 
