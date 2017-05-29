@@ -1,0 +1,17 @@
+package: github.com/rai-project/rai-docker-volume
+import:
+- package: github.com/Sirupsen/logrus
+  version: ~0.11.5
+- package: github.com/Unknwon/com
+  version: ~1.0.0
+- package: github.com/fatih/color
+  version: ~1.5.0
+- package: github.com/rai-project/cmd
+- package: github.com/rai-project/config
+- package: github.com/rai-project/docker
+  subpackages:
+  - cuda
+- package: github.com/rai-project/logger
+- package: github.com/rai-project/server
+- package: github.com/spf13/cobra
+- package: github.com/spf13/viper
