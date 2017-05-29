@@ -1,0 +1,8 @@
+[Unit]
+Description=RAI Docker Volume Socket
+
+[Socket]
+ListenStream=/run/docker/plugins/rai-docker-volume.sock
+
+[Install]
+WantedBy=sockets.target

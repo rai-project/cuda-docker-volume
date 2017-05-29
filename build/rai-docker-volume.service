@@ -1,11 +1,14 @@
 [Unit]
 Description=RAI CUDA Docker Volume
 Documentation=https://github.com/rai-project/rai-docker-volume
-After=local-fs.target network-online.target
-Wants=network-online.target systemd-networkd-wait-online.service syslog.target nvidia-persistenced.service
 Before=docker.service
-Requires=docker.service
+After=network.target rai-docker-volume.socket
+Wants=network-online.target systemd-networkd-wait-online.service syslog.target nvidia-persistenced.service
+Requires=rai-docker-volume.socket docker.service
 
+
+[Install]
+WantedBy=multi-user.target
 
 [Service]
 Environment="CONFIG_FILE=/etc/raid/rai_config.yml"
@@ -22,7 +25,7 @@ PrivateTmp=true
 #ProtectSystem=full
 StandardOutput=syslog
 
-ExecStart=/home/dakkak/.gvm/pkgsets/go1.8/global/bin/rai-docker-volume cuda --debug --verbose --config=$CONFIG_FILE
+ExecStart=/usr/local/bin/rai-docker-volume cuda --debug --verbose --config=$CONFIG_FILE
 ExecReload=/bin/kill -USR1 $MAINPID
 
 [Install]
