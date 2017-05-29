@@ -53,10 +53,12 @@ Try startring the plugin. It should succeed.
     systemctl start rai-docker-volume.service
     systemctl status rai-docker-volume.service
 
-Identify your nvidia driver version with `nvidia-smi` or through some other means.
+Check that the rai-cuda volume is present:
 
+    docker volume ls
+
+Identify your nvidia driver version with `nvidia-smi` or through some other means.
 Try creating a volume using that diver version. For example, for driver version `361.119`:
 
     docker volume create --driver=rai-cuda rai-cuda_361.119
-    docker volume ls
 
