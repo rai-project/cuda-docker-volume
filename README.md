@@ -1,4 +1,4 @@
-# RAI Docker Volume
+# RAI Docker Volume [![Build Status](https://travis-ci.org/rai-project/rai-docker-volume.svg?branch=master)](https://travis-ci.org/rai-project/rai-docker-volume)
 
 Provides a Docker volume for mapping the NVIDIA driver into containers run by the RAI Daemon.
 
