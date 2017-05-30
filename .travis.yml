@@ -1,6 +1,6 @@
 language: go
 go:
-- '1.8.1'
+- 1.8.1
 sudo: true
 before_install:
 - sudo add-apt-repository ppa:masterminds/glide -y
@@ -79,6 +79,10 @@ deploy:
   detect_encoding: true
   on:
     repo: rai-project/rai-docker-volume
+after_deploy:
+- echo "releasing v${VERSION}..."
+- ghr -t "$GITHUB_TOKEN" -u rai-project -r rai --replace "v${VERSION}" "${DIST}/latest"
+- cd ${TRAVIS_BUILD_DIR}
 env:
   global:
-    secure: m5Y8hFl56sUL0CW25IQ/dVli4ez9KYrgM5izmKM1XfEhb5sPx/rsVK2ie0dM/UDFS8AgGOxCEOTK1MCBe0bo48sE5aJsftrdziAMkcx5ooZ8VJ0Ut4WPlOa6MddqJQIbMsLVusjstQbtJ1LQrCiX9FyLoA356dipNjVxSKy7uaw7jFHHWjJBLzwn9Kg/bW3L/PbBRpkq66EwKBg2CUtQo/zmVRmuhsju55v8Bl3w6UeaavHlBNqgkM0pimMLfTjOLuJ89q4V/xnbjIZcDlq54rnu5sVkwwOdqA6nCKJeUgxjIvY0Xh2OfuxDadzAJ8nkWfhyEnGLWJCKYjmrUSWDybr/S9C093wlRZ9HLfnC4tcfNy9uOqkke71YhLV3FZiBSqucvWZqv/nFLv97GfmkvQs80abua6t0UcaCasnQxP7c7EirQeTwdqEMU7hH/xWFqda1xsnh1Povtvspzq1pB08WEiu5cg3mdrTzW8kLMrCptjzvH5GeYg3Dcb3hdQhk+Ize8WaSE9ZZAa+V7arqn78MbNnLluPFg01pXEnznWVzEbVOrjly1eqgyycAkkQUIojZ+6Bm9jRXKOOcUBu/PAAyV4judUN+bnpzB+1OzTSc0rnhadVcepvAdkXY5H4j8zhezNbHpEy1mFGS13T8BXizcPqFG0Yu5PqYyU+zjUA=
+    secure: fAe2+N495liW7LoqIxfj1C3BSfAxchH9P8/R+fGTwsAb+IzukGKW2l5Cpcu5zMPe/up85PjffAIBw78H2eSlMrb22Si35lHVW8irbJ/1goSm1vly+9UAJbJxfSAVsjAPfZq9JAJJEqWIZb2EjvI+VJrjFVS+YhLp6e/GjyE/UlXlyfZy2Cv1AO8XJWdIUH+lhh2+GRgwbGk10wlWCPuPTvntsQmVXp8OzRthx9ekUP/mZteL8CItf0j2Fyie+0+bRNkrH5CfyoKFV9VbVQgbLc4boiLi/hZhU1UTsGIfW6g++lG7f07bu4dMYPX4W9W8pzAJjMqq8U8oUoL60T1jE8iceqVb0LAkSZ6z8ewpMZoCb6LEJ/k8ddgcLFZ3U4RG4jSioyRd0PHwfy+eca4I1EbXxfZkoJu10VwQeuFnhQCB7DkgVYS7uYeJnNXoE/sPFh9bn3RtjzVnBPykBkFfkUft4o6jNvIxFmT0XfhfTgcXYXravs01UHb6u66iWU9OS1AGrviZMaED517n7cKtAPK1xBHKCnbu0/wWwbwDBe0wQy2OXNrtvPYR1PjF+GdIJYU0NMMVFLujeJREKgMtOGuDUN3cCj7buh96wpuG3uGYsDoZDw4pyX0h7TDs0ofOS3PhbdYUK39wEVzVPrNr8SBRy4nAo3fo7NdYuYNv4ao=
