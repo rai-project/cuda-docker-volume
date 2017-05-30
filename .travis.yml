@@ -1,6 +1,6 @@
 language: go
 go:
-- '1.8'
+- '1.8.1'
 sudo: true
 before_install:
 - sudo add-apt-repository ppa:masterminds/glide -y
@@ -20,8 +20,8 @@ script:
 - DIST=${TRAVIS_BUILD_DIR}/dist/rai-docker-volume/stable
 - CGO_ENABLED=0 gox -verbose  -os="linux darwin windows" -arch="amd64 386 armv5 armv6
   armv7 arm64" -osarch="!darwin/arm64 linux/ppc64 linux/ppc64le" -ldflags="$(govvv
-  -flags) -s -w -extldflags
-  \"-static\"" -output="${DIST}/${VERSION}/{{.OS}}-{{.Arch}}/{{.Dir}}" .
+  -flags) -s -w -extldflags \"-static\"" -output="${DIST}/${VERSION}/{{.OS}}-{{.Arch}}/{{.Dir}}"
+  .
 before_deploy:
 - echo "go-selfupdate generating bindiffs"
 - mkdir -p ${DIST}/${VERSION}/binaries
@@ -70,12 +70,15 @@ deploy:
   provider: s3
   access_key_id: AKIAIAFSJLCCOYB5V3EQ
   secret_access_key:
-    secure: ttpg/QvD7TcPUw7tqoluO/Wa7Q+tCEfqefbZfbnGMp1gZOawn9rk8cH2KQ6/2z9bXaK24hOw8ixqk/rn7LhJ1b5NxODogJaONhphs7sDIfDarieyNMwjLtgfvQruX04cxacYq8GqTP1hG+9AgXgpJiDkYmixfPrzfUuvc2DKM/DfEk0gywDdNEoTkgsPvsC0aTCZF2fBi1vxmpUFqk3oQTRmYFJeBJ/L28gxQuXjQk0ymL7rk428S9hQw5BRtRNJhdnozUXse3uGVG2UbG+m7KGTmCScb+8At3SaeVqHSzzFupWgcWCCJyBlpqXX0RzKiW3/sXeM1ryuyfJ68a7pPUEQuuwOWEcYX9HgnFjRWc7lS47serYIkaFMhp0EYJGP1eWF9hm78LP9C6nMTU/Dr0Hk0xnSX5Gv7sIn0wx0NovV78ofsSBvUxvln8V1cng9cIgFSuxAgQqfGaaeUg4JKZSb9hxhXs6Xh8Ya+LOuS7CJCPQ+VqNuvhl4Hg/0Hi3S/zpsO+PEJoUfnJPohIDxQbFMiqW21Py4taJK0kVRFOJgxyx7o2Kvp9w8GIV6obZVFXfbG7t2RzXc1n8L5O2uo4SDCOGDLFuFeROpzE/UwdCoKQVHQspjGc+ysOOqeULT/OzwD0v9NsRVrC63qISgzEQ6hkjY/NzS3DjQzmZeINM=
+    secure: M18fULRVeyjlL7yY1KMEUA94qqiDdW+xLAlO7jUkblsU2Ga79ir+k4tj20CYg63BlFwxbnN4oXAR/sR+R+yy3Zk5DmbWifeen8Aqeft3mEELNq63glJSYCxP5hzkhHfpaNVemBgrjAhFrW6INnJHoX+mHfgj9DBGdqmbtxxTHZ4/FZlQUowbnzE5AHUS6Aoh/HWk+ywHh3ef+5Wu7wB2ZB8bWhDApG4MKDxXbfzy7gVKGmPyzf47PlV82FY+NtcDVVAfk5k6S3ehVloxqw3MlJ1XH03FdoH383pOvgBwrxJU2U7j0TFItcx1RUWQCXvHf3aJFSxs3QuFy/MWvVL3DHHMyb2irlaUxo01ABKpvrBF+fC8wcgR8RKezbaAqtbSWx3SRcuw4k0jF/2KmST4aMcXaud5w3c3dtxmXi9Qm1K3RuHV3w90mtlS01qqFcYVMJhnZdihIAJYmLhEOF9MRgJNAnPEUvql/Z1oSM3FFyAcpZjIazZjZsJpxp6QgznkHIMpkcLr9rNFbVTjPaDA93bC/7MeT8LWHrLRWTmoWAH3Q+Zxb+8P/HFixMU6SBfrxBf2R9QGSM5NdwAObCYWzKq69DElfEV//+mQgNIcJl/I8kV2ogevpuHhJX7uJsa1AvkwvlnFPMNueL87qw+sNUc9L5HdXjWB0J+U/06QLpc=
   bucket: files.rai-project.com
   local-dir: dist
   upload-dir: dist
-  acl: private
+  acl: public_read
   skip_cleanup: true
   detect_encoding: true
   on:
     repo: rai-project/rai-docker-volume
+env:
+  global:
+    secure: m5Y8hFl56sUL0CW25IQ/dVli4ez9KYrgM5izmKM1XfEhb5sPx/rsVK2ie0dM/UDFS8AgGOxCEOTK1MCBe0bo48sE5aJsftrdziAMkcx5ooZ8VJ0Ut4WPlOa6MddqJQIbMsLVusjstQbtJ1LQrCiX9FyLoA356dipNjVxSKy7uaw7jFHHWjJBLzwn9Kg/bW3L/PbBRpkq66EwKBg2CUtQo/zmVRmuhsju55v8Bl3w6UeaavHlBNqgkM0pimMLfTjOLuJ89q4V/xnbjIZcDlq54rnu5sVkwwOdqA6nCKJeUgxjIvY0Xh2OfuxDadzAJ8nkWfhyEnGLWJCKYjmrUSWDybr/S9C093wlRZ9HLfnC4tcfNy9uOqkke71YhLV3FZiBSqucvWZqv/nFLv97GfmkvQs80abua6t0UcaCasnQxP7c7EirQeTwdqEMU7hH/xWFqda1xsnh1Povtvspzq1pB08WEiu5cg3mdrTzW8kLMrCptjzvH5GeYg3Dcb3hdQhk+Ize8WaSE9ZZAa+V7arqn78MbNnLluPFg01pXEnznWVzEbVOrjly1eqgyycAkkQUIojZ+6Bm9jRXKOOcUBu/PAAyV4judUN+bnpzB+1OzTSc0rnhadVcepvAdkXY5H4j8zhezNbHpEy1mFGS13T8BXizcPqFG0Yu5PqYyU+zjUA=
