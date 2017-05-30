@@ -43,20 +43,22 @@ Reload the systemd daemon since you changed some files
 
     systemctl daemon-reload
 
-Try starting the socket. It should succeed.
-
-    systemctl start rai-docker-volume.socket
-    systemctl status rai-docker-volume.socket
-
-Try startring the plugin. It should succeed.
+Try startring the plugin. It should succeed, and automatically start the socket also.
 
     systemctl start rai-docker-volume.service
+    systemctl status rai-docker-volume.socket
     systemctl status rai-docker-volume.service
 
 Check that the rai-cuda volume is present:
 
     docker volume ls
 
+## Troubleshooting steps
+
+
+You can run the rai-docker-volume binary as root yourself, and it should work the same way.
+
+If the plugin does not create a volume, you can try making one yourself and seing what happens.
 Identify your nvidia driver version with `nvidia-smi` or through some other means.
 Try creating a volume using that diver version. For example, for driver version `361.119`:
 
