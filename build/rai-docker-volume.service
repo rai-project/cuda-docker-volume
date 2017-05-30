@@ -11,7 +11,7 @@ Requires=rai-docker-volume.socket docker.service
 WantedBy=multi-user.target
 
 [Service]
-#Environment="CONFIG_FILE=/etc/raid/rai_config.yml"
+Environment="CONFIG_FILE=/etc/raid/rai_config.yml"
 
 #Type=simple
 #User=dakkak
@@ -25,8 +25,7 @@ WantedBy=multi-user.target
 #ProtectSystem=full
 #StandardOutput=syslog
 #
-#ExecStart=/usr/lib/docker/rai-docker-volume cuda --debug --verbose --config=$CONFIG_FILE
-ExecStart=/usr/lib/docker/rai-docker-volume cuda --debug --verbose
+ExecStart=/usr/lib/docker/rai-docker-volume cuda --debug --verbose --config=$CONFIG_FILE
 #ExecReload=/bin/kill -USR1 $MAINPID
 
 [Install]
