@@ -1,13 +1,13 @@
 package: github.com/rai-project/rai-docker-volume
 import:
 - package: github.com/sirupsen/logrus
-  version: ~1.0.0
+  version: ^1.0.0
 - package: github.com/Sirupsen/logrus
   repo: git@github.com:/sirupsen/logrus
   vcs: git
-  version: ~1.0.0
+  version: ^1.0.0
 - package: github.com/Unknwon/com
-  version: ~1.0.0
+  version: ^1.0.0
 - package: github.com/fatih/color
 - package: github.com/rai-project/cmd
 - package: github.com/rai-project/config
