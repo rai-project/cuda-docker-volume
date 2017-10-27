@@ -42,6 +42,7 @@ var RootCmd = &cobra.Command{
 	Use:          "rai-docker-volume",
 	SilenceUsage: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		cudaCmd.Run(cmd, args)
 		return nil
 	},
 }
@@ -88,7 +89,7 @@ func initConfig() {
 		}
 		opts = append(opts, config.ConfigFileAbsolutePath(configFile))
 	} else {
-		opts = append(opts, config.ConfigFileBaseName(".raid_config"))
+		opts = append(opts, config.ConfigFileBaseName(".rai_config"))
 	}
 	if appSecret != "" {
 		opts = append(opts, config.AppSecret(appSecret))
