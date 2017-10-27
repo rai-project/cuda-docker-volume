@@ -23,7 +23,7 @@ script:
 - VERSION=$(cat ./VERSION)
 - echo "VERSION = ${VERSION}"
 - DIST=${TRAVIS_BUILD_DIR}/dist/rai-docker-volume/stable
-- CGO_ENABLED=0 gox -verbose  -os="linux darwin windows" -arch="amd64 386 armv5 armv6
+- CGO_ENABLED=0 gox -verbose  -os="linux darwin" -arch="amd64 386 armv5 armv6
   armv7 arm64" -osarch="!darwin/arm64 linux/ppc64 linux/ppc64le" -ldflags="$(govvv
   -flags) -s -w -extldflags \"-static\"" -output="${DIST}/${VERSION}/{{.OS}}-{{.Arch}}/{{.Dir}}"
   .
@@ -51,10 +51,6 @@ before_deploy:
   ${TRAVIS_BUILD_DIR}/VERSION
 - tar --transform 's/.*\///g' -czvf ${DIST}/${VERSION}/binaries/linux-ppc64le  ${DIST}/${VERSION}/linux-ppc64le/rai-docker-volume     ${TRAVIS_BUILD_DIR}/LICENSE.TXT
   ${TRAVIS_BUILD_DIR}/VERSION
-- tar --transform 's/.*\///g' -czvf ${DIST}/${VERSION}/binaries/windows-386    ${DIST}/${VERSION}/windows-386/rai-docker-volume.exe   ${TRAVIS_BUILD_DIR}/LICENSE.TXT
-  ${TRAVIS_BUILD_DIR}/VERSION
-- tar --transform 's/.*\///g' -czvf ${DIST}/${VERSION}/binaries/windows-amd64  ${DIST}/${VERSION}/windows-amd64/rai-docker-volume.exe
-  ${TRAVIS_BUILD_DIR}/LICENSE.TXT ${TRAVIS_BUILD_DIR}/VERSION
 - go-selfupdate -o ${DIST}/updates ${DIST}/${VERSION}/binaries/ ${VERSION}
 - cp ${DIST}/${VERSION}/binaries/darwin-386    ${DIST}/latest/darwin-386.tar.gz
 - cp ${DIST}/${VERSION}/binaries/darwin-amd64  ${DIST}/latest/darwin-amd64.tar.gz
@@ -66,8 +62,6 @@ before_deploy:
 - cp ${DIST}/${VERSION}/binaries/linux-arm64   ${DIST}/latest/linux-arm64.tar.gz
 - cp ${DIST}/${VERSION}/binaries/linux-ppc64   ${DIST}/latest/linux-ppc64.tar.gz
 - cp ${DIST}/${VERSION}/binaries/linux-ppc64le ${DIST}/latest/linux-ppc64le.tar.gz
-- cp ${DIST}/${VERSION}/binaries/windows-386   ${DIST}/latest/windows-386.tar.gz
-- cp ${DIST}/${VERSION}/binaries/windows-amd64 ${DIST}/latest/windows-amd64.tar.gz
 - rm -fr ${DIST}/${VERSION}/binaries
 - echo "Copying latest directory to ${DIST}/${TRAVIS_COMMIT}"
 - cp -r ${DIST}/latest ${DIST}/${TRAVIS_COMMIT}
