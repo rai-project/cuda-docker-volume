@@ -20,11 +20,15 @@ Some more info on plugin activation [here](https://docs.docker.com/engine/extend
 
 ### Build your own
 
-Get the dependencies
+Get the dependencies 
+
+    go get -u -v ./...
+
+or via glide:
 
     glide install
 
-Build the binary
+Then build the binary
 
     go build
 
