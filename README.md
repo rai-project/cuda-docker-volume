@@ -28,7 +28,11 @@ Build the binary
 
     go build
 
-## 2. Set up the rai-docker-volume systemd service
+## 2. Run the plugin
+
+    nohup ./rai-docker-volume &
+
+## (Optional) Set up the rai-docker-volume systemd service
 
 Move the binary into the `/usr/lib/docker` directory. How you do this depends on how you got the binary.
 
@@ -36,7 +40,6 @@ Move the service and socket unit files into the appropriate places. On Ubuntu 16
 
     cp build/rai-docker-volume.service /lib/systemd/system/.
     cp build/rai-docker-volume.socket /lib/systemd/system/.
-
 
 # Check
 Reload the systemd daemon since you changed some files
